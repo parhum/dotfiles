@@ -1,0 +1,21 @@
+[user]
+        name = parhum
+[color]
+        ui = auto
+[alias]
+        br = branch
+        co = checkout
+        st = status
+        undo-last-commit = reset --soft HEAD~
+        obranch = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+        pgrep = grep --break --heading --line-number
+        slog = log --stat
+        dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+        lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
+[core]
+        autocrlf = input
+        editor = vim
+[grep]
+        lineNumber = true
+[push]
+        default = simple
